@@ -22,3 +22,5 @@ ListかMapを作成して、その内容をコンソール画面に表示(内容
 
 *"ratingの数値(0,1,2)"を検索条件にし、条件にあったList要素を抽出(stream,filter使用)。  
 Scannerを使いコンソールに"0,1,2"の数値を入力するよう指示。if文による条件分岐で表示する要素を切り替え。"0,1,2"以外が入力された場合には"try-catch"で例外を出力
+![通常処理](https://user-images.githubusercontent.com/103630732/171875025-f3634eb1-023e-4d4f-b6a3-66ba9d3a2ef5.png)
+![例外処理](https://user-images.githubusercontent.com/103630732/171875111-c7623131-5b7d-4933-a80a-a2d5f139315d.png)
