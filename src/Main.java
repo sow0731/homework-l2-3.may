@@ -1,5 +1,6 @@
 import java.util.Comparator;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -7,7 +8,8 @@ public class Main {
         System.out.println("                            ");
         System.out.println("<映画情報の一覧を表示します>");
 
-        for (MovieInfo info : MovieList.initMovieList()) {
+        List<MovieInfo> movies = MovieList.initMovieList();
+        for (MovieInfo info : movies) {
             System.out.println(info);
         }
 
@@ -17,7 +19,7 @@ public class Main {
         System.out.println("<評価値(Rating)の高い順に表示を並べ替えます>");
 
         Comparator<MovieInfo> comparator = Comparator.comparing(MovieInfo::getRating).reversed();
-        MovieList.initMovieList().stream().sorted(comparator).forEach(movieInfo -> System.out.println(movieInfo));
+        movies.stream().sorted(comparator).forEach(movieInfo -> System.out.println(movieInfo));
 
         System.out.println("                            ");
         System.out.println("****************************");
@@ -31,14 +33,14 @@ public class Main {
             if (inputRating < 0 || inputRating > 2) {
                 throw new InputMismatchException("0~2の数値で検索してください");
 
-            } else if (inputRating==0) {
-                MovieList.initMovieList().stream().filter(movieInfo -> movieInfo.getRating()==0).forEach(System.out::println);
+            } else if (inputRating == 0) {
+                movies.stream().filter(movieInfo -> movieInfo.getRating() == 0).forEach(System.out::println);
 
-            } else if (inputRating==1) {
-                MovieList.initMovieList().stream().filter(movieInfo -> movieInfo.getRating()==1).forEach(System.out::println);
+            } else if (inputRating == 1) {
+                movies.stream().filter(movieInfo -> movieInfo.getRating() == 1).forEach(System.out::println);
 
-            } else if (inputRating==2) {
-                MovieList.initMovieList().stream().filter(movieInfo -> movieInfo.getRating()==2).forEach(System.out::println);
+            } else if (inputRating == 2) {
+                movies.stream().filter(movieInfo -> movieInfo.getRating() == 2).forEach(System.out::println);
 
             }
         } catch (InputMismatchException e) {
