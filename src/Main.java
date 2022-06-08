@@ -1,14 +1,15 @@
 import java.util.Comparator;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InputMismatchException {
         System.out.println("                            ");
         System.out.println("<映画情報の一覧を表示します>");
 
-        MovieList list = new MovieList();
-        for (MovieInfo info : list.movieList) {
+        List<MovieInfo> movies = MovieList.initMovieList();
+        for (MovieInfo info : movies) {
             System.out.println(info);
         }
 
@@ -18,7 +19,7 @@ public class Main {
         System.out.println("<評価値(Rating)の高い順に表示を並べ替えます>");
 
         Comparator<MovieInfo> comparator = Comparator.comparing(MovieInfo::getRating).reversed();
-        list.movieList.stream().sorted(comparator).forEach(movieInfo -> System.out.println(movieInfo));
+        movies.stream().sorted(comparator).forEach(movieInfo -> System.out.println(movieInfo));
 
         System.out.println("                            ");
         System.out.println("****************************");
@@ -27,20 +28,26 @@ public class Main {
         System.out.println("検索したい映画の評価値(Rating)を0~2の値で入力してください");
 
         try {
-            int inputRating = new Scanner(System.in).nextInt(3);
+            int inputRating = new Scanner(System.in).nextInt();
 
-            if (inputRating==0) {
-                list.movieList.stream().filter(movieInfo -> movieInfo.getRating()==0).forEach(System.out::println);
+            if (inputRating < 0 || inputRating > 2) {
+                throw new InputMismatchException("0~2の数値で検索してください");
 
-            } else if (inputRating==1) {
-                list.movieList.stream().filter(movieInfo -> movieInfo.getRating()==1).forEach(System.out::println);
+            } else if (inputRating == 0) {
+                movies.stream().filter(movieInfo -> movieInfo.getRating() == 0).forEach(System.out::println);
 
-            } else if (inputRating==2) {
-                list.movieList.stream().filter(movieInfo -> movieInfo.getRating()==2).forEach(System.out::println);
+            } else if (inputRating == 1) {
+                movies.stream().filter(movieInfo -> movieInfo.getRating() == 1).forEach(System.out::println);
+
+            } else if (inputRating == 2) {
+                movies.stream().filter(movieInfo -> movieInfo.getRating() == 2).forEach(System.out::println);
 
             }
         } catch (InputMismatchException e) {
-            System.out.println("/0~2の整数で検索してください/" + e.getMessage());
+            System.out.println("不正な数値が入力されています。" + e.getMessage());
+
+        } finally {
+            System.out.println("検索を終了します。");
         }
     }
 }

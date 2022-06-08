@@ -1,29 +1,25 @@
-# 5月度課題　第2回と第３回分
+modify-homework-l2-3.may
 
-## 課題内容
-### 第２回課題内容
-オリジナルのクラスを作成  
-for文を使った繰り返し処理を実装  
-if文を使った条件分岐処理を実装  
+# 提出した課題について修正が必要な箇所があった為、Pull&Requestを作成
 
-### 第３回課題内容
-ListかMapを作成して、その内容をコンソール画面に表示(内容は複数)  
-任意のプログラムで例外を起こしてみる　　
-　　
-## 提出課題の概要　　
-映画情報を表示させるコードを書きました
+## 修正内容
 
-## 提出課題の説明  
-*オリジナルのクラス"MovieInfo"を作成し、"title","filmDirector","releaseYear","rating"フィールドを追加  
+### 1.) src/Main.javaに"InputMismatchException"をthrowするコードを追加
 
-*"MovieInfo"をList要素の型に使い、Listを作成  
+"src/Main.java"の"inputRating"に"0~2"以外の数値が入力された場合のハンドリングの追加が必要だった為、
+"InputMismatchException"をthrowするよう追加修正。
 
-*MainクラスでforEachを使い、Listの一覧を表示、次いでListの要素である"rating"の数値が高い順に一覧表示を並び替え(stream,sortedを使用)  
+### 2.) src/MovieList.javaにStaticイニシャライザを作成
 
-*"ratingの数値(0,1,2)"を検索条件にし、条件にあったList要素を抽出(stream,filter使用)  
-Scannerを使いコンソールに"0,1,2"の数値を入力するよう指示。if文による条件分岐で表示する要素を切り替え。"0,1,2"以外が入力された場合には"try-catch"で例外を出力
+Listの要素を他クラスで書き換えられる恐れがあった為、
+"src/MovieList.java"にStaticメソッド(Staticイニシャライザ)を作成し、他クラスからListの内容を書き換えられないように修正。
 
-### 実行結果
-![通常処理](https://user-images.githubusercontent.com/103630732/171875025-f3634eb1-023e-4d4f-b6a3-66ba9d3a2ef5.png)  
-  
-![例外処理](https://user-images.githubusercontent.com/103630732/171875111-c7623131-5b7d-4933-a80a-a2d5f139315d.png)
+### 3.) src/Main.java内のコードのフォーマットを修正
+
+src/Main.java内に記述している等値演算子(==)の前後にスペースがなかった為、Intelli Jの設定から修正。
+
+### 4.) src/Main.java内のコードの冗長化について対策
+
+"MovieList.initMovieList"と記述していた箇所について、
+コードが冗長化してしまう為、"List<MovieInfo>"を"movies"で変数化し記述することによって対策。
+
